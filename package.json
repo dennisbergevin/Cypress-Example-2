@@ -1,0 +1,15 @@
+{
+  "name": "cypress-example",
+  "version": "1.0.0",
+  "description": "Cypress Example",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run",
+    "open": "npx cypress open"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^8.0.2",
+    "cypress": "^9.6.1"
+  }
+}

@@ -1,0 +1,13 @@
+export const cityName = "Test City";
+export const emailAddress = "test@test.com";
+export const employeeID = "12345";
+export const firstName = "Test";
+export const lastName = "User";
+export const state = "TX";
+export const streetAddress = "123 Main Street";
+export const telephone = "(999) 999-9999";
+export const textDescription = "Testing Something";
+export const userName = "dennis.bergevin";
+export const userPassword = "68uQK7C7kY7ufU";
+export const zipCode = "12345";
+export const appId = "aF5sqnNFCc36kO9_J";

@@ -11,4 +11,3 @@
 ## Defect Report
 
 - To view a log of defects found on the platform, view the `defectReport.md` file in this repository.
-# qa-practical
