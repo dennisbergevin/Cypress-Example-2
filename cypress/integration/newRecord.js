@@ -36,7 +36,7 @@ describe("User can successfully create and delete new record", () => {
     });
   });
 
-  it.only("User can delete created record", () => {
+  it("User can delete created record", () => {
     record.newRecordIcon.should("be.visible").click();
     record.fillRequiredRecordForm();
     record.saveBtn.click().then(() => {
