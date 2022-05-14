@@ -1,8 +1,8 @@
-import { cityName } from "../constants";
-
 class Login {
   get loginBtn() {
-    return cy.findByRole("button", { name: "Login" });
+    return cy.findByRole("button", {
+      name: "Login"
+    });
   }
 
   get userNameField() {

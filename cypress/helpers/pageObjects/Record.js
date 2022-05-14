@@ -1,4 +1,16 @@
-import { appId } from "../constants";
+import {
+  recordCityName,
+  recordEmailAddress,
+  recordEmployeeID,
+  recordFirstName,
+  recordLastName,
+  recordState,
+  recordStreetAddress,
+  recordTelephone,
+  recordTextDescription,
+  recordZipCode,
+  appId
+} from "../../helpers/constants";
 
 class Record {
   get newRecordIcon() {
@@ -112,34 +124,34 @@ class Record {
     );
   }
 
-  interceptExecuteRecordApiCall() {
-    return cy.intercept("POST", "/api/task/execute/record");
+  interceptTracesApiCall() {
+    return cy.intercept("POST", "/otel/v1/traces");
   }
 
-  fillRequiredRecordForm(firstName, lastName, cityName) {
+  fillRequiredRecordForm(firstName = recordFirstName, lastName = recordLastName, cityName = recordCityName) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);
     this.lastNameInput.type(lastName);
     this.cityInput.type(cityName);
   }
 
-  fillIncompleteRecordForm(firstName, lastName) {
+  fillIncompleteRecordForm(firstName = recordFirstName, lastName = recordLastName) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);
     this.lastNameInput.type(lastName);
   }
 
   fillEntireRecordForm(
-    firstName,
-    lastName,
-    streetAddress,
-    cityName,
-    state,
-    telephone,
-    zipCode,
-    email,
-    textDescription,
-    employeeID
+    firstName = recordFirstName,
+    lastName = recordLastName,
+    streetAddress = recordStreetAddress,
+    cityName = recordCityName,
+    state = recordState,
+    telephone = recordTelephone,
+    zipCode = recordZipCode,
+    email = recordEmailAddress,
+    textDescription = recordTextDescription,
+    employeeID = recordEmployeeID
   ) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);

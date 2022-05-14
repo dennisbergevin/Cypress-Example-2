@@ -1,16 +1,6 @@
 import {
   userName,
   userPassword,
-  state,
-  streetAddress,
-  firstName,
-  lastName,
-  cityName,
-  telephone,
-  zipCode,
-  emailAddress,
-  employeeID,
-  textDescription,
 } from "../helpers/constants";
 import record from "../helpers/pageObjects/Record";
 import login from "../helpers/pageObjects/Login";
@@ -23,12 +13,12 @@ describe("User can successfully create new record", () => {
     record.interceptRecordPostApiCall().as("recordPost");
     record.interceptRecordGetApiCall().as("recordGet");
     record.interceptRecordDeleteApiCall().as("recordDelete");
-    record.interceptExecuteRecordApiCall().as("waitForRecord");
+    record.interceptTracesApiCall().as("waitForRecord");
   });
 
   it("User can create new record with only required fields", () => {
     record.newRecordIcon.should("be.visible").click();
-    record.fillRequiredRecordForm(firstName, lastName, cityName);
+    record.fillRequiredRecordForm();
     record.saveBtn.click().then(() => {
       record.confirmationSaveBtn.should("be.visible").click();
     });
@@ -40,18 +30,7 @@ describe("User can successfully create new record", () => {
 
   it("User can create new record with all fields", () => {
     record.newRecordIcon.should("be.visible").click();
-    record.fillEntireRecordForm(
-      firstName,
-      lastName,
-      streetAddress,
-      cityName,
-      state,
-      telephone,
-      zipCode,
-      emailAddress,
-      textDescription,
-      employeeID
-    );
+    record.fillEntireRecordForm();
     record.saveBtn.click().then(() => {
       record.confirmationSaveBtn.should("be.visible").click();
     });
@@ -63,7 +42,7 @@ describe("User can successfully create new record", () => {
 
   it("User can delete created record", () => {
     record.newRecordIcon.should("be.visible").click();
-    record.fillRequiredRecordForm(firstName, lastName, cityName);
+    record.fillRequiredRecordForm();
     record.saveBtn.click().then(() => {
       record.confirmationSaveBtn.should("be.visible").click();
     });
@@ -79,7 +58,7 @@ describe("User can successfully create new record", () => {
 
   it("Error shows for new record without required fields", () => {
     record.newRecordIcon.should("be.visible").click();
-    record.fillIncompleteRecordForm(firstName, lastName);
+    record.fillIncompleteRecordForm();
     record.saveBtn.click().then(() => {
       record.confirmationSaveBtn.should("be.visible").click();
     });
