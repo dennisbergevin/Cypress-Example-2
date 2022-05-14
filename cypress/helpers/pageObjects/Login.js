@@ -22,7 +22,7 @@ class Login {
   }
 
   get welcomeContainer() {
-    return cy.get('[data-cy="welcome__container');
+    return cy.get('[data-cy="welcome__container]');
   }
 
   navigate() {
