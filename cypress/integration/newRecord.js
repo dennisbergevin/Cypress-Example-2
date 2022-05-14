@@ -5,7 +5,7 @@ import {
 import record from "../helpers/pageObjects/Record";
 import login from "../helpers/pageObjects/Login";
 
-describe("User can successfully create new record", () => {
+describe("User can successfully create and delete new record", () => {
   beforeEach(() => {
     login.navigate();
     login.setUserCredentials(userName, `${userPassword}{enter}`);
