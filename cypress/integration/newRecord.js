@@ -1,7 +1,4 @@
-import {
-  userName,
-  userPassword,
-} from "../helpers/constants";
+import { userName, userPassword } from "../helpers/constants";
 import record from "../helpers/pageObjects/Record";
 import login from "../helpers/pageObjects/Login";
 
@@ -13,7 +10,6 @@ describe("User can successfully create and delete new record", () => {
     record.interceptRecordPostApiCall().as("recordPost");
     record.interceptRecordGetApiCall().as("recordGet");
     record.interceptRecordDeleteApiCall().as("recordDelete");
-    record.interceptTracesApiCall().as("waitForRecord");
   });
 
   it("User can create new record with only required fields", () => {
@@ -40,17 +36,19 @@ describe("User can successfully create and delete new record", () => {
     });
   });
 
-  it("User can delete created record", () => {
+  it.only("User can delete created record", () => {
     record.newRecordIcon.should("be.visible").click();
     record.fillRequiredRecordForm();
     record.saveBtn.click().then(() => {
       record.confirmationSaveBtn.should("be.visible").click();
     });
+    record.interceptHistoryApiCall().as("waitForRecord");
+
     record.recordSavedMessage.should("be.visible");
     cy.wait("@waitForRecord").then(() => {
       record.deleteRecordBtn.click();
+      record.confirmDeleteOkBtn.should("be.visible").click();
     });
-    record.confirmDeleteOkBtn.should("be.visible").click();
     cy.wait("@recordDelete").should((xhr) => {
       expect(xhr.status).to.equal(204);
     });

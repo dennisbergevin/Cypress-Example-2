@@ -9,7 +9,7 @@ import {
   recordTelephone,
   recordTextDescription,
   recordZipCode,
-  appId
+  appId,
 } from "../../helpers/constants";
 
 class Record {
@@ -124,18 +124,25 @@ class Record {
     );
   }
 
-  interceptTracesApiCall() {
-    return cy.intercept("POST", "/otel/v1/traces");
+  interceptHistoryApiCall() {
+    return cy.intercept("GET", "/api/history?type=Records*");
   }
 
-  fillRequiredRecordForm(firstName = recordFirstName, lastName = recordLastName, cityName = recordCityName) {
+  fillRequiredRecordForm(
+    firstName = recordFirstName,
+    lastName = recordLastName,
+    cityName = recordCityName
+  ) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);
     this.lastNameInput.type(lastName);
     this.cityInput.type(cityName);
   }
 
-  fillIncompleteRecordForm(firstName = recordFirstName, lastName = recordLastName) {
+  fillIncompleteRecordForm(
+    firstName = recordFirstName,
+    lastName = recordLastName
+  ) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);
     this.lastNameInput.type(lastName);
