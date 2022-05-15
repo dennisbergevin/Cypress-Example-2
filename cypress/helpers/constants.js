@@ -38,8 +38,6 @@ export const allRecordFields = [
 
 export const requiredRecordFields = [
   recordData.CITY,
-
   recordData.FIRST_NAME,
-
   recordData.LAST_NAME,
 ];
