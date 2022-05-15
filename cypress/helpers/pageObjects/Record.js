@@ -163,7 +163,7 @@ class Record {
     this.textInput.type(textDescription);
     this.employeeIDInput.type(employeeID);
     this.favouriteBandDropdown.click().then(() => {
-      this.bandOptionItem.first().should("be.visible").click();
+      this.bandOptionItem.contains("The Beatles").should("be.visible").click();
     });
     this.hiringInfoLabel.contains("Full Time").click();
     this.hiringInfoLabel.contains("Dental").click();
