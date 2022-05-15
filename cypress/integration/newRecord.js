@@ -19,7 +19,6 @@ describe("User can successfully create and delete new record", () => {
     });
     record.recordSavedMessage.should("be.visible");
     cy.wait("@recordPost").then((interception) => {
-      console.log(interception);
       expect(interception.response.body.values.aFjm80LnbJf780V6p).to.eq(
         "Test City"
       );
