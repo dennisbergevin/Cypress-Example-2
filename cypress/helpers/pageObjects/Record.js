@@ -104,24 +104,15 @@ class Record {
   }
 
   interceptRecordPostApiCall() {
-    return cy.route(
-      "POST",
-      `${Cypress.config().baseUrl}/api/app/${appId}/record`
-    );
+    return cy.route("POST", `/api/app/${appId}/record`);
   }
 
   interceptRecordGetApiCall() {
-    return cy.route(
-      "GET",
-      `${Cypress.config().baseUrl}/api/app/${appId}/record/*`
-    );
+    return cy.route("GET", `/api/app/${appId}/record/*`);
   }
 
   interceptRecordDeleteApiCall() {
-    return cy.route(
-      "DELETE",
-      `${Cypress.config().baseUrl}/api/app/${appId}/record/*`
-    );
+    return cy.route("DELETE", `/api/app/${appId}/record/*`);
   }
 
   interceptHistoryApiCall() {
