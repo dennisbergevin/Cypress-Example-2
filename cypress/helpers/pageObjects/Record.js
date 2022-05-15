@@ -1,16 +1,4 @@
-import {
-  recordCityName,
-  recordEmailAddress,
-  recordEmployeeID,
-  recordFirstName,
-  recordLastName,
-  recordState,
-  recordStreetAddress,
-  recordTelephone,
-  recordTextDescription,
-  recordZipCode,
-  appId,
-} from "../../helpers/constants";
+import { appId, recordData, recordFields } from "../../helpers/constants";
 
 class Record {
   get newRecordIcon() {
@@ -120,9 +108,9 @@ class Record {
   }
 
   fillRequiredRecordForm(
-    firstName = recordFirstName,
-    lastName = recordLastName,
-    cityName = recordCityName
+    firstName = recordData.FIRST_NAME,
+    lastName = recordData.LAST_NAME,
+    cityName = recordData.CITY
   ) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);
@@ -131,8 +119,8 @@ class Record {
   }
 
   fillIncompleteRecordForm(
-    firstName = recordFirstName,
-    lastName = recordLastName
+    firstName = recordData.FIRST_NAME,
+    lastName = recordData.LAST_NAME
   ) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);
@@ -140,16 +128,16 @@ class Record {
   }
 
   fillEntireRecordForm(
-    firstName = recordFirstName,
-    lastName = recordLastName,
-    streetAddress = recordStreetAddress,
-    cityName = recordCityName,
-    state = recordState,
-    telephone = recordTelephone,
-    zipCode = recordZipCode,
-    email = recordEmailAddress,
-    textDescription = recordTextDescription,
-    employeeID = recordEmployeeID
+    firstName = recordData.FIRST_NAME,
+    lastName = recordData.LAST_NAME,
+    streetAddress = recordData.STREET_ADDRESS,
+    cityName = recordData.CITY,
+    state = recordData.STATE,
+    telephone = recordData.PHONE,
+    zipCode = recordData.ZIP,
+    email = recordData.EMAIL,
+    textDescription = recordData.TEXT,
+    employeeID = recordData.EMPLOYEE_ID
   ) {
     this.recordForm.should("be.visible");
     this.firstNameInput.type(firstName);
@@ -163,11 +151,14 @@ class Record {
     this.textInput.type(textDescription);
     this.employeeIDInput.type(employeeID);
     this.favouriteBandDropdown.click().then(() => {
-      this.bandOptionItem.contains("The Beatles").should("be.visible").click();
+      this.bandOptionItem
+        .contains(recordData.FAVOURITE_BAND)
+        .should("be.visible")
+        .click();
     });
-    this.hiringInfoLabel.contains("Full Time").click();
-    this.hiringInfoLabel.contains("Dental").click();
-    this.hiringInfoLabel.contains("Engineering").click();
+    this.hiringInfoLabel.contains(recordData.HIRING_STATUS).click();
+    this.hiringInfoLabel.contains(recordData.BENEFITS).click();
+    this.hiringInfoLabel.contains(recordData.DEPARTMENT).click();
   }
 }
 
