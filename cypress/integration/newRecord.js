@@ -19,13 +19,13 @@ describe("User can successfully create and delete new record", () => {
   it("User can create new record with only required fields", () => {
     record.newRecordIcon.should("be.visible").click();
     record.fillRequiredRecordForm();
-    record.saveBtn.click().then(() => {
-      record.confirmationSaveBtn.should("be.visible").click();
-    });
+    record.saveRecord();
     record.recordSavedMessage.should("be.visible");
+
     cy.wait("@recordPost").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
 
+      // Check entries are included in response
       for (const property in requiredRecordFields) {
         expect(JSON.stringify(interception.response.body.values)).to.include(
           `${requiredRecordFields[property]}`
@@ -37,14 +37,13 @@ describe("User can successfully create and delete new record", () => {
   it("User can create new record with all fields", () => {
     record.newRecordIcon.should("be.visible").click();
     record.fillEntireRecordForm();
-    record.saveBtn.click().then(() => {
-      record.confirmationSaveBtn.should("be.visible").click();
-    });
+    record.saveRecord();
     record.recordSavedMessage.should("be.visible");
 
     cy.wait("@recordGet").should((interception) => {
       expect(interception.response.statusCode).to.eq(200);
 
+      // Check entries are included in response
       for (const property in allRecordFields) {
         expect(JSON.stringify(interception.response.body.values)).to.include(
           `${allRecordFields[property]}`
@@ -56,16 +55,16 @@ describe("User can successfully create and delete new record", () => {
   it("User can delete created record", () => {
     record.newRecordIcon.should("be.visible").click();
     record.fillRequiredRecordForm();
-    record.saveBtn.click().then(() => {
-      record.confirmationSaveBtn.should("be.visible").click();
-    });
-    record.interceptHistoryApiCall().as("waitForRecord");
-
+    record.saveRecord();
     record.recordSavedMessage.should("be.visible");
+
+    // Explicit wait to ensure delete record icon is visible in UI
+    record.interceptHistoryApiCall().as("waitForRecord");
     cy.wait("@waitForRecord").then(() => {
       record.deleteRecordBtn.click();
       record.confirmDeleteOkBtn.should("be.visible").click();
     });
+
     cy.wait("@recordDelete").should((interception) => {
       expect(interception.response.statusCode).to.eq(204);
     });
@@ -74,9 +73,7 @@ describe("User can successfully create and delete new record", () => {
   it("Error shows for new record without required fields", () => {
     record.newRecordIcon.should("be.visible").click();
     record.fillIncompleteRecordForm();
-    record.saveBtn.click().then(() => {
-      record.confirmationSaveBtn.should("be.visible").click();
-    });
+    record.saveRecord();
     record.recordErrorMessage.should("be.visible");
   });
 });

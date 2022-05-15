@@ -160,6 +160,12 @@ class Record {
     this.hiringInfoLabel.contains(recordData.BENEFITS).click();
     this.hiringInfoLabel.contains(recordData.DEPARTMENT).click();
   }
+
+  saveRecord() {
+    this.saveBtn.click().then(() => {
+      this.confirmationSaveBtn.should("be.visible").click();
+    });
+  }
 }
 
 export default new Record();
