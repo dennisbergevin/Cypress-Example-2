@@ -6,7 +6,6 @@ describe("User can successfully create and delete new record", () => {
   beforeEach(() => {
     login.navigate();
     login.setUserCredentials(userName, `${userPassword}{enter}`);
-    cy.server();
     record.interceptRecordPostApiCall().as("recordPost");
     record.interceptRecordGetApiCall().as("recordGet");
     record.interceptRecordDeleteApiCall().as("recordDelete");
@@ -19,8 +18,8 @@ describe("User can successfully create and delete new record", () => {
       record.confirmationSaveBtn.should("be.visible").click();
     });
     record.recordSavedMessage.should("be.visible");
-    cy.wait("@recordPost").should((xhr) => {
-      expect(xhr.status).to.equal(200);
+    cy.wait("@recordPost").then((interception) => {
+      expect(interception.response.statusCode).to.equal(200);
     });
   });
 
@@ -31,8 +30,8 @@ describe("User can successfully create and delete new record", () => {
       record.confirmationSaveBtn.should("be.visible").click();
     });
     record.recordSavedMessage.should("be.visible");
-    cy.wait("@recordGet").should((xhr) => {
-      expect(xhr.status).to.equal(200);
+    cy.wait("@recordGet").should((interception) => {
+      expect(interception.response.statusCode).to.equal(200);
     });
   });
 
@@ -49,8 +48,8 @@ describe("User can successfully create and delete new record", () => {
       record.deleteRecordBtn.click();
       record.confirmDeleteOkBtn.should("be.visible").click();
     });
-    cy.wait("@recordDelete").should((xhr) => {
-      expect(xhr.status).to.equal(204);
+    cy.wait("@recordDelete").should((interception) => {
+      expect(interception.response.statusCode).to.equal(204);
     });
   });
 

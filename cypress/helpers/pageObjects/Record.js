@@ -104,15 +104,15 @@ class Record {
   }
 
   interceptRecordPostApiCall() {
-    return cy.route("POST", `/api/app/${appId}/record`);
+    return cy.intercept("POST", `/api/app/${appId}/record`);
   }
 
   interceptRecordGetApiCall() {
-    return cy.route("GET", `/api/app/${appId}/record/*`);
+    return cy.intercept("GET", `/api/app/${appId}/record/*`);
   }
 
   interceptRecordDeleteApiCall() {
-    return cy.route("DELETE", `/api/app/${appId}/record/*`);
+    return cy.intercept("DELETE", `/api/app/${appId}/record/*`);
   }
 
   interceptHistoryApiCall() {
