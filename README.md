@@ -1,4 +1,4 @@
-# QA Practical
+# Cypress Example
 
 ## Build Steps
 
